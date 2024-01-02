@@ -4,3 +4,5 @@
 5,iphone1444,iphone11111,100.0,1,APPLE,2023-12-08
 6,IPhone14,akjkjkfhd,1000.0,1,SAMSUNG,2023-12-08
 7,davavavavdadv,advadvsavdadvav,123333.0,1,APPLE,2023-12-11
+8,gigigigigigi,fofofofoofof,888.0,1,SAMSUNG,2023-12-28
+9,iphoneeeeee,ojojojojjojo,10000.0,1,SAMSUNG,2024-01-02

@@ -10,10 +10,9 @@ public class InputUtils {
         do {
             System.out.println(title);
             name = scanner.nextLine();
-            flag = ValidateUtils.isProductStringValid(name, regex);             // true - khớp với REGEX
+            flag = ValidateUtils.isProductStringValid(name, regex);
 
-            if(!flag){      // false
-                // nếu ko khớp
+            if(!flag){
                 System.out.println(errorMessage);
             }
         } while (!flag);

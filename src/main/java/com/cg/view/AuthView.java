@@ -26,8 +26,10 @@ public class AuthView extends BaseView{
         User user = userService.checkUserNamePasswordCorrect(username, password);
         if (user!=null) {
             this.context.setUser(user);
+            System.out.println("Đăng nhập thành công với quyền ADMIN");
             showMainMenu();
         }else{
+            System.out.println("Tài khoản không tồn tại bạn vui lòng đăng nhập lại !!!");
 //            login();
             // neu sai thi bat login lai
         }

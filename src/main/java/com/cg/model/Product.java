@@ -5,7 +5,7 @@ import com.cg.utils.DateUtils;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Product implements IParser {
+public class Product implements IParser,Discount {
     public static long currentID = 0;
     private long id;
     private String name;
@@ -139,5 +139,7 @@ public class Product implements IParser {
 
 
     }
+
+
 }
 

@@ -38,7 +38,8 @@ public class OrderView extends BaseView {
             System.out.println("                                            ║ ▶ 3.Cập nhật đơn hàng                               ║");
             System.out.println("                                            ║ ▶ 4.Kiểm tra doanh thu tháng                        ║");
             System.out.println("                                            ║ ▶ 5.Kiểm tra doanh thu theo ngày                    ║");
-            System.out.println("                                            ║ ▶ 6.Quay lại menu                                   ║");
+            System.out.println("                                            ║ ▶ 6.Độ tăng trưởng của doanh thu theo tháng         ║");
+            System.out.println("                                            ║ ▶ 7.Quay lại menu                                   ║");
             System.out.println("                                            ║ ▶ Chon chức năng                                    ║");
             System.out.println("                                            ╚═════════════════════════════════════════════════════╝");
 
@@ -65,7 +66,11 @@ public class OrderView extends BaseView {
                     showRevenueOfDay();
                     break;
                 }
-                case 6: {
+                case 6 : {
+                    showGrowthRate();
+                    break;
+                }
+                case 7: {
                     flag = true;
                     this.context.getAuthView().showMainMenu();
                     break;
@@ -99,7 +104,7 @@ public class OrderView extends BaseView {
             } else {
                 updateProductQuantityInOrder(product, quantity, order);
             }
-            int choice = getNumberMinMax("Chọn 1 để mua tiếp\n Chọn 2 để thanh toán", 1, 2);
+            int choice = getNumberMinMax(" Chọn 1 để mua tiếp\n Chọn 2 để thanh toán", 1, 2);
             switch (choice) {
                 case 1:
                     flag = true;
@@ -139,8 +144,8 @@ public class OrderView extends BaseView {
         return false;
     }
 
-    private void calculateRevenue(int month) {
-        LocalDate startDate = LocalDate.of(2023, month, 1);
+    private void calculateRevenue(int month,int yeah) {
+        LocalDate startDate = LocalDate.of(yeah, month, 1);
         LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
         System.out.println("Doanh thu của tháng này là : " + orderService.totalOrder(startDate, endDate));
     }
@@ -149,11 +154,13 @@ public class OrderView extends BaseView {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập tháng bạn muốn kiểm tra doanh thu: ");
         int month = scanner.nextInt();
+        System.out.println("Nhập năm : ");
+        int yeah = scanner.nextInt();
         if (month < 1 || month > 12) {
             System.out.println("Tháng không hợp lệ !!!");
             return;
         }
-        calculateRevenue(month);
+        calculateRevenue(month,yeah);
     }
 
     private void caculateRevenueOfDay(int day, int month, int year) {
@@ -175,6 +182,38 @@ public class OrderView extends BaseView {
         }
         caculateRevenueOfDay(day, month, year);
     }
+
+    private void caculateGrowthRate(int thisMonth, int compareMonth,int yeah,int yeah1) {
+        LocalDate date = LocalDate.of(yeah, thisMonth, 1);
+        LocalDate date1 = LocalDate.of(yeah1, compareMonth, 1);
+        double growthRate = orderService.calculateGrowthPercentage(date, date1);
+        if (growthRate > 0) {
+            System.out.println("Tăng trưởng: " + growthRate + "%");
+        } else if (growthRate < 0) {
+            System.out.println("Giảm: " + Math.abs(growthRate) + "%");
+        } else {
+            System.out.println("Không có sự thay đổi so với tháng trước");
+        }
+
+    }
+
+    private void showGrowthRate() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập tháng bạn muốn kiểm tra : ");
+        int thisMonth = scanner.nextInt();
+        System.out.println("Nhập năm : ");
+        int yeah = scanner.nextInt();
+        System.out.println("Nhập tháng bạn muốn so sánh : ");
+        int compareMonth = scanner.nextInt();
+        System.out.println("Nhập năm : ");
+        int yeah1 = scanner.nextInt();
+        if (thisMonth < 1 || thisMonth > 12 || compareMonth < 1 || compareMonth > 12 || yeah < 0|| yeah1 < 0) {
+            System.out.println("Tháng không hợp lệ !!!");
+            return;
+        }
+        caculateGrowthRate(thisMonth,compareMonth,yeah,yeah1);
+    }
+
 
     private void showOrders() {
         List<Order> orders = orderService.getAll();

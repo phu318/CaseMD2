@@ -41,10 +41,6 @@ public class OrderService {
         List<Order> orders = getAll();
         orders.add(order);
         FileUtils.writeFile(orders, Config.PATH_FILE_ORDER);
-
-
-        // lưu order detail
-        //3,2,1,5,900000
         orderDetailService.saveOrderDetails(order);
 
     }
@@ -63,7 +59,6 @@ public class OrderService {
     }
 
 
-
     public double totalOrder(LocalDate starDate, LocalDate endDate) {
         double total = 0.0;
         List<Order> orders = getOrders(starDate, endDate);
@@ -72,7 +67,8 @@ public class OrderService {
         }
         return total;
     }
-    public List<Order> getOrderOfDay(LocalDate date){
+
+    public List<Order> getOrderOfDay(LocalDate date) {
         List<Order> orders = getAll();
         List<Order> result = new ArrayList<>();
         for (Order order : orders) {
@@ -82,17 +78,27 @@ public class OrderService {
         }
         return result;
     }
-    public double totalOrderOfDay(LocalDate date){
+
+
+    public double totalOrderOfDay(LocalDate date) {
         List<Order> orders = getOrderOfDay(date);
-        double total =0.0;
+        double total = 0.0;
         for (Order order : orders) {
             total += order.getTotal();
         }
-        return  total;
+        return total;
     }
 
+    public double calculateGrowthPercentage(LocalDate thisMonth, LocalDate compareMonth) {
+        double thisMonthTotal = totalOrder(thisMonth, thisMonth.plusMonths(1).minusDays(1));
+        double compareMonthTotal = totalOrder(compareMonth, compareMonth.plusMonths(1).minusDays(1));
+        if (compareMonthTotal != 0) {
+            return ((thisMonthTotal - compareMonthTotal) / compareMonthTotal) * 100;
+        } else {
+            return 0;
+        }
 
-
+    }
 
 
 }

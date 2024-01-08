@@ -2,14 +2,13 @@ package com.cg.view;
 
 import com.cg.ShopApplication;
 import com.cg.model.User;
+import com.cg.service.IUserService;
 import com.cg.service.UserService;
 
 import java.util.Scanner;
 
 public class AuthView extends BaseView{
-    private UserService userService;
     public AuthView(ShopApplication context){
-        userService = new UserService();
         this.context = context;
     }
     @Override

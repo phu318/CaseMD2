@@ -5,6 +5,7 @@ import com.cg.model.ECategory;
 import com.cg.model.ERole;
 import com.cg.model.Product;
 import com.cg.model.User;
+import com.cg.service.IProductService;
 import com.cg.service.ProductService;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
@@ -18,7 +19,6 @@ public class ProductView extends BaseView{
 
     public ProductView(ShopApplication shopApplication) {
         this.context = shopApplication;
-        productService = new ProductService();
         if (!FileUtils.checkFileExits(Config.PATH_FILE_PRODUCT)) {
             productService.init();
         }else{

@@ -8,11 +8,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderService {
+public class OrderService implements IOrderService {
+    private static OrderService orderService = null;
+
+    public static OrderService getInstance() {
+        if (orderService == null) {
+            orderService = new OrderService();
+        }
+        return orderService;
+    }
+
     private OrderDetailService orderDetailService;
 
-    public OrderService() {
-        this.orderDetailService = new OrderDetailService();
+    private OrderService() {
+        this.orderDetailService = OrderDetailService.getInstance();
     }
 
     public List<Order> getAll() {

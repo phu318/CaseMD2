@@ -1,0 +1,4 @@
+iProductService=com.cg.service.ProductService
+iUserService=com.cg.service.UserService
+iOrderService=com.cg.service.OrderService
+iOrderDetailService=com.cg.service.OrderDetailService

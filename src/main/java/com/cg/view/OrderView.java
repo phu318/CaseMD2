@@ -16,13 +16,8 @@ import java.util.Scanner;
 
 public class OrderView extends BaseView {
     public OrderView(ShopApplication context) {
-        orderService = new OrderService();
-        productService = new ProductService();
         this.context = context;
     }
-
-    private OrderService orderService;
-    private ProductService productService;
 
 
     public void launcher() {

@@ -3,8 +3,7 @@ package com.cg.view;
 import com.cg.ShopApplication;
 import com.cg.model.Product;
 import com.cg.model.User;
-import com.cg.service.ProductService;
-import com.cg.service.UserService;
+import com.cg.service.*;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -12,12 +11,17 @@ import java.util.Scanner;
 public abstract class BaseView {
     protected Scanner scanner = new Scanner(System.in);
     protected ShopApplication context;
-    protected ProductService productService;
-    protected UserService userService;
+    protected IProductService productService;
+    protected IUserService userService;
+    protected IOrderService orderService;
+    protected IOrderDetailService orderDetailService;
+
 
     public BaseView() {
-        productService = new ProductService();
-        userService = new UserService();
+        productService = ProductService.getInstance();
+        userService = UserService.getInstance();
+        orderDetailService = OrderDetailService.getInstance();
+        orderService = OrderService.getInstance();
     }
 
     public Product inputProductId(String title) {

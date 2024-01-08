@@ -8,7 +8,15 @@ import com.cg.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService {
+public class UserService implements IUserService{
+    private UserService(){}
+    private static UserService userService = null;
+    public static UserService getInstance(){
+        if (userService == null) {
+            userService = new UserService();
+        }
+        return userService;
+    }
     public List<User> getAll(){
         return FileUtils.readFile(Config.PATH_FILE_USER, User.class);
     }

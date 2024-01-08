@@ -11,7 +11,17 @@ import com.cg.utils.FileUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductService {
+public class ProductService implements IProductService {
+    private static ProductService productService = null;
+    private ProductService(){
+
+    }
+    public static ProductService getInstance(){
+        if (productService == null) {
+            productService = new ProductService();
+        }
+        return productService;
+    }
     public List<Product> getAll() {
         return FileUtils.readFile(Config.PATH_FILE_PRODUCT, Product.class);
     }

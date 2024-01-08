@@ -13,11 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class UserView extends BaseView{
-    private UserService userService;
     public UserView(ShopApplication shopApplication){
-        userService = new UserService();
         this.context = shopApplication;
-
         if (!FileUtils.checkFileExits(Config.PATH_FILE_USER)) {
             userService.init();
         }else{
